@@ -1,0 +1,535 @@
+/* ================================================================
+   BloodLink — Custom Theme
+   Sits on top of Bootstrap 5, doesn't override core grid/components
+   Primary colour: #c0392b | Font: Plus Jakarta Sans
+   ================================================================ */
+
+
+/* ---- Colour palette ---- */
+:root {
+    --blood:        #c0392b;
+    --blood-dark:   #962820;
+    --blood-light:  #e74c3c;
+    --blood-glow:   rgba(192, 57, 43, 0.12);
+    --bg-soft:      #fef7f7;
+    --bg-page:      #f5f6fa;
+    --text-primary: #1a1a2e;
+    --text-muted:   #6c7a89;
+    --card-shadow:  0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+    --card-hover:   0 4px 12px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.10);
+    --radius:       14px;
+    --radius-sm:    10px;
+    --transition:   all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ---- Base layout ---- */
+body {
+    background: var(--bg-page);
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+main { flex: 1; }
+
+
+/* ================================================================
+   NAVBAR
+   ================================================================ */
+.navbar {
+    padding: 0.6rem 0;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    font-size: 1.25rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    font-size: 0.88rem;
+    padding: 0.5rem 0.85rem !important;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.nav-link:hover { background: rgba(255,255,255,0.12); }
+
+
+/* ================================================================
+   HERO SECTION (landing page)
+   ================================================================ */
+.hero-section {
+    background: linear-gradient(135deg, var(--blood) 0%, #7b1a1a 50%, #1a1a2e 100%);
+    color: #fff;
+    padding: 5rem 0 6rem;
+    margin-top: -1.5rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.hero-section .lead {
+    opacity: 0.85;
+    font-weight: 400;
+}
+
+
+/* ================================================================
+   CARDS
+   ================================================================ */
+.card {
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    background: #fff;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-hover);
+}
+
+.card-header {
+    background: #fff;
+    border-bottom: 1px solid #f0f1f5;
+    font-weight: 700;
+    padding: 1rem 1.25rem;
+}
+
+.card-header h5,
+.card-header h6 { font-weight: 700; }
+
+.card-body { padding: 1.25rem; }
+
+/* Dashboard stat cards */
+.card-stat {
+    border-left: 4px solid var(--blood);
+    border-radius: var(--radius);
+}
+
+.dash-stat {
+    text-align: center;
+    padding: 1.8rem 1.2rem;
+}
+
+.dash-stat i {
+    font-size: 1.3rem;
+    color: var(--blood);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.dash-stat .number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.dash-stat .label {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+/* Nav cards on dashboards — clickable icon+label boxes */
+.card.text-decoration-none .card-body { padding: 1.5rem 1rem; }
+
+.card.text-decoration-none:hover {
+    border-color: var(--blood-light);
+    background: var(--bg-soft);
+}
+
+.card.text-decoration-none h6 {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+}
+
+
+/* ================================================================
+   BADGES
+   ================================================================ */
+
+/* All badges — rounded pill style */
+.badge {
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.3px;
+    padding: 0.35em 0.75em;
+    border-radius: 20px;
+}
+
+/* Urgency badges — green through red */
+.badge-urgency-low      { background: #27ae60; }
+.badge-urgency-medium   { background: #f39c12; }
+.badge-urgency-high     { background: #e67e22; }
+.badge-urgency-critical {
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.7; }
+}
+
+/* Status badges */
+.badge-status-pending   { background: #f39c12; }
+.badge-status-verified  { background: #27ae60; }
+.badge-status-rejected  { background: #c0392b; }
+.badge-status-open      { background: #3498db; }
+.badge-status-fulfilled { background: #27ae60; }
+.badge-status-closed    { background: #95a5a6; }
+.badge-status-confirmed { background: #27ae60; }
+.badge-status-completed { background: var(--text-primary); }
+.badge-status-cancelled { background: #e74c3c; }
+
+/* Blood type badge — red circle */
+.blood-type-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blood), var(--blood-dark));
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 8px var(--blood-glow);
+}
+
+.blood-type-badge-sm { width: 32px; height: 32px; font-size: 0.7rem; }
+
+
+/* ================================================================
+   FORMS
+   ================================================================ */
+.form-control,
+.form-select {
+    border-radius: var(--radius-sm);
+    border: 1.5px solid #e0e3ea;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--blood);
+    box-shadow: 0 0 0 3px var(--blood-glow);
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+/* Password strength bar */
+#pw-strength {
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+
+/* ================================================================
+   BUTTONS
+   ================================================================ */
+.btn {
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 1.1rem;
+    transition: var(--transition);
+    letter-spacing: 0.1px;
+}
+
+.btn-blood {
+    background: linear-gradient(135deg, var(--blood), var(--blood-dark));
+    border: none;
+    color: #fff;
+    box-shadow: 0 2px 8px var(--blood-glow);
+}
+
+.btn-blood:hover {
+    background: linear-gradient(135deg, var(--blood-dark), #6e1a12);
+    color: #fff;
+    box-shadow: 0 4px 16px var(--blood-glow);
+    transform: translateY(-1px);
+}
+
+
+/* ================================================================
+   AUTH PAGES (login, register, forgot password)
+   ================================================================ */
+.auth-container { max-width: 520px; margin: 2.5rem auto; }
+
+.auth-card {
+    border-radius: 18px;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+}
+
+.auth-card .card-header {
+    background: linear-gradient(135deg, var(--blood) 0%, #7b1a1a 50%, #1a1a2e 100%);
+    color: #fff;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-bottom: none;
+}
+
+.auth-card .card-header h4 { font-weight: 700; margin-bottom: 0.2rem; }
+.auth-card .card-body { padding: 2rem; }
+
+/* Auth page links — pill buttons */
+.auth-card a,
+.auth-link {
+    color: var(--blood);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.auth-card a:hover,
+.auth-link:hover {
+    color: #fff;
+    background: var(--blood);
+    text-decoration: none;
+}
+
+.auth-card .text-center a {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1.5px solid var(--blood);
+    font-size: 0.85rem;
+    margin: 0 0.2rem;
+}
+
+.auth-card .text-center a:hover { background: var(--blood); color: #fff; }
+.auth-card .text-center a i { margin-right: 0.3rem; }
+
+/* Admin login step 2 — hidden until JS reveals it */
+.admin-key-section {
+    display: none;
+    animation: fadeSlide 0.35s ease-out;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ================================================================
+   TABLES
+   ================================================================ */
+.table {
+    font-size: 0.88rem;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead th {
+    background: var(--bg-soft);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    border-bottom: 2px solid #f0e0e0;
+    padding: 0.75rem 0.85rem;
+}
+
+.table tbody td {
+    padding: 0.7rem 0.85rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 0.9rem;
+}
+
+.table-hover tbody tr:hover { background: var(--blood-glow); }
+
+
+/* ================================================================
+   NOTIFICATIONS
+   ================================================================ */
+.notification-item {
+    padding: 1rem 1.2rem;
+    border-left: 4px solid #e0e3ea;
+    margin-bottom: 0.5rem;
+    background: #fff;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    transition: var(--transition);
+}
+
+.notification-item.unread {
+    background: var(--bg-soft);
+    border-left-color: var(--blood);
+    box-shadow: 0 1px 4px var(--blood-glow);
+}
+
+
+/* ================================================================
+   LANDING PAGE — feature icons
+   ================================================================ */
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.3rem;
+}
+
+
+/* ================================================================
+   LOCATION AUTOCOMPLETE
+   ================================================================ */
+.autocomplete-wrap { position: relative; }
+
+.autocomplete-list {
+    position: absolute;
+    z-index: 100;
+    background: #fff;
+    border: 1.5px solid #e0e3ea;
+    border-top: none;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    width: 100%;
+    max-height: 220px;
+    overflow-y: auto;
+    display: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.autocomplete-list .ac-item {
+    padding: 0.6rem 0.85rem;
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: var(--transition);
+}
+
+.autocomplete-list .ac-item:hover,
+.autocomplete-list .ac-item.active {
+    background: var(--bg-soft);
+    color: var(--blood);
+}
+
+
+/* ================================================================
+   FLASH MESSAGES
+   ================================================================ */
+.flash-auto {
+    animation: flashSlide 0.4s ease;
+}
+
+@keyframes flashSlide {
+    from { transform: translateY(-10px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+/* Alert cleanup */
+.alert {
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    border: none;
+    font-weight: 500;
+}
+
+.alert-info    { background: #eef6ff; color: #1a5276; }
+.alert-warning { background: #fef9e7; color: #7d6608; }
+.alert-success { background: #eafaf1; color: #1e7e34; }
+.alert-danger  { background: #fdeaea; color: #922b21; }
+
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+footer {
+    background: #1a1a2e !important;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+}
+
+footer a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+footer a:hover { color: var(--blood-light) !important; }
+
+
+/* ================================================================
+   MISC POLISH
+   ================================================================ */
+h2     { font-weight: 700; letter-spacing: -0.3px; }
+h5, h6 { font-weight: 600; }
+strong { font-weight: 700; }
+hr     { border-color: #f0f1f5; opacity: 0.6; }
+
+code {
+    font-size: 0.82rem;
+    background: #f5f5fa;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+}
+
+.text-muted { color: var(--text-muted) !important; }
+
+/* Smoother scrollbar */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 768px) {
+    .hero-section        { padding: 3rem 0 4rem; }
+    .hero-section h1     { font-size: 2rem; }
+    .dash-stat           { padding: 1.2rem 0.8rem; }
+    .dash-stat .number   { font-size: 1.5rem; }
+    .auth-container      { margin: 1rem; max-width: 100% !important; }
+}
