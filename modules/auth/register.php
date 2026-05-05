@@ -101,7 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name         = $hospitalName;
 
             if (strlen($hospitalName) < 2) $errors[] = 'Hospital name is required.';
-            if (!preg_match('/^[0-9]{8}$/', $license)) $errors[] = 'License number must be exactly 8 digits.';
             if (!preg_match('/^[0-9]{10}$/', $hPhone)) $errors[] = 'Phone number must be exactly 10 digits.';
 
             if (empty($errors)) {
@@ -377,10 +376,10 @@ input.is-invalid {
                         <label class="form-label">License Number *</label>
                         <input type="text" class="form-control" name="license_number" id="license_number"
                                value="<?= e($old['license_number'] ?? '') ?>"
-                               placeholder="Enter your 8 digit license number"
-                               maxlength="8" inputmode="numeric" required oninput="validateLicenseNumber()">
+                               placeholder="Enter your unique license number (hospital)"
+                               required oninput="validateLicenseNumber()">
                         <div id="license_number-error" class="field-error-msg">
-                            <i class="fas fa-times-circle me-1"></i>License number must be exactly 8 digits.
+                            <i class="fas fa-times-circle me-1"></i>License number is required.
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -634,8 +633,7 @@ function validateWeight() {
 function validateLicenseNumber() {
     var field = document.getElementById('license_number');
     if (!field) return;
-    var value = field.value.replace(/[^0-9]/g, '');
-    setFieldError('license_number', 'License number must be exactly 8 digits.', value.length > 0 && value.length !== 8);
+    setFieldError('license_number', 'License number is required.', field.value.trim().length === 0);
 }
 
 function validateHospitalName() {
