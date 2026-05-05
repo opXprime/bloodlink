@@ -1,0 +1,347 @@
+country,city,area,latitude,longitude
+Nepal,Kathmandu,Thamel,27.7150,85.3125
+Nepal,Kathmandu,Balaju,27.7300,85.3050
+Nepal,Kathmandu,New Baneshwor,27.6910,85.3420
+Nepal,Kathmandu,Chabahil,27.7180,85.3450
+Nepal,Kathmandu,Kalanki,27.6935,85.2815
+Nepal,Kathmandu,Swayambhu,27.7148,85.2903
+Nepal,Kathmandu,Bouddha,27.7215,85.3620
+Nepal,Kathmandu,Kirtipur,27.6780,85.2775
+Nepal,Kathmandu,Maharajgunj,27.7350,85.3280
+Nepal,Kathmandu,Koteshwor,27.6780,85.3490
+Nepal,Lalitpur,Patan Dhoka,27.6725,85.3250
+Nepal,Lalitpur,Jawalakhel,27.6680,85.3150
+Nepal,Lalitpur,Mangal Bazaar,27.6710,85.3270
+Nepal,Lalitpur,Satdobato,27.6570,85.3290
+Nepal,Lalitpur,Godavari,27.5950,85.3730
+Nepal,Bhaktapur,Durbar Square,27.6720,85.4280
+Nepal,Bhaktapur,Suryabinayak,27.6650,85.4450
+Nepal,Bhaktapur,Thimi,27.6815,85.3880
+Nepal,Pokhara,Lakeside,28.2096,83.9563
+Nepal,Pokhara,Prithvi Chowk,28.2150,83.9850
+Nepal,Pokhara,Bagar,28.2230,83.9700
+Nepal,Pokhara,Mahendrapul,28.2100,83.9910
+Nepal,Pokhara,Nayabazar,28.2300,83.9780
+Nepal,Biratnagar,Main Road,26.4525,87.2718
+Nepal,Biratnagar,Traffic Chowk,26.4620,87.2650
+Nepal,Biratnagar,Rani,26.4480,87.2800
+Nepal,Chitwan,Bharatpur,27.6830,84.4340
+Nepal,Chitwan,Narayangarh,27.6940,84.4290
+Nepal,Chitwan,Ratnanagar,27.6510,84.4850
+Nepal,Butwal,Traffic Chowk,27.7006,83.4483
+Nepal,Butwal,Kalikanagar,27.6890,83.4550
+Nepal,Dharan,Putali Line,26.8120,87.2830
+Nepal,Dharan,Bhanu Chowk,26.8065,87.2745
+Nepal,Nepalgunj,City Centre,28.0500,81.6167
+Nepal,Nepalgunj,Surkhet Road,28.0580,81.6250
+Nepal,Janakpur,Station Area,26.7288,85.9266
+Nepal,Janakpur,Ram Mandir,26.7310,85.9240
+Nepal,Hetauda,Bus Park,27.4287,85.0322
+Nepal,Birgunj,Ghantaghar,27.0104,84.8821
+Nepal,Damak,Main Bazaar,26.6631,87.6944
+Denmark,Copenhagen,Nørrebro,55.6950,12.5530
+Denmark,Copenhagen,Vesterbro,55.6700,12.5500
+Denmark,Copenhagen,Østerbro,55.7050,12.5750
+Denmark,Copenhagen,Amager,55.6500,12.6000
+Denmark,Copenhagen,Frederiksberg,55.6800,12.5300
+Denmark,Aarhus,City Centre,56.1572,10.2107
+Denmark,Aarhus,Risskov,56.1850,10.2250
+Denmark,Odense,City Centre,55.3960,10.3883
+Denmark,Odense,Bolbro,55.3950,10.3550
+Denmark,Aalborg,City Centre,57.0488,9.9217
+Spain,Madrid,Sol,40.4168,-3.7038
+Spain,Madrid,Salamanca,40.4275,-3.6838
+Spain,Madrid,Chamberí,40.4350,-3.7050
+Spain,Barcelona,Eixample,41.3910,2.1650
+Spain,Barcelona,Gràcia,41.4036,2.1575
+Spain,Barcelona,Barceloneta,41.3810,2.1900
+Spain,Valencia,Ciutat Vella,39.4699,-0.3763
+Spain,Seville,Triana,37.3828,-6.0050
+Spain,Bilbao,Casco Viejo,43.2630,-2.9250
+India,New Delhi,Connaught Place,28.6315,77.2167
+India,New Delhi,Karol Bagh,28.6519,77.1905
+India,New Delhi,Saket,28.5244,77.2066
+India,Mumbai,Andheri,19.1136,72.8697
+India,Mumbai,Bandra,19.0596,72.8295
+India,Mumbai,Dadar,19.0178,72.8478
+India,Kolkata,Park Street,22.5530,88.3514
+India,Kolkata,Salt Lake,22.5800,88.4120
+India,Bangalore,Koramangala,12.9352,77.6245
+India,Bangalore,Indiranagar,12.9784,77.6408
+India,Chennai,T Nagar,13.0400,80.2340
+India,Hyderabad,Banjara Hills,17.4156,78.4489
+Bangladesh,Dhaka,Dhanmondi,23.7465,90.3760
+Bangladesh,Dhaka,Gulshan,23.7925,90.4150
+Bangladesh,Dhaka,Mirpur,23.8042,90.3653
+Bangladesh,Chittagong,Agrabad,22.3230,91.8100
+Bangladesh,Chittagong,Nasirabad,22.3500,91.8200
+Bangladesh,Sylhet,Zindabazar,24.8950,91.8690
+France,Paris,Le Marais,48.8566,2.3522
+France,Paris,Montmartre,48.8867,2.3431
+France,Paris,Saint-Germain,48.8530,2.3340
+France,Lyon,Presquile,45.7640,4.8357
+France,Lyon,Vieux Lyon,45.7600,4.8270
+France,Marseille,Vieux Port,43.2965,5.3698
+United Kingdom,London,Westminster,51.4995,-0.1248
+United Kingdom,London,Camden,51.5390,-0.1426
+United Kingdom,London,Shoreditch,51.5265,-0.0780
+United Kingdom,Manchester,City Centre,53.4808,-2.2426
+United Kingdom,Manchester,Didsbury,53.4175,-2.2290
+United Kingdom,Edinburgh,Old Town,55.9533,-3.1883
+United Kingdom,Leicester,City Centre,52.6369,-1.1398
+Germany,Berlin,Mitte,52.5200,13.4050
+Germany,Berlin,Kreuzberg,52.4990,13.4030
+Germany,Berlin,Prenzlauer Berg,52.5388,13.4244
+Germany,Munich,Altstadt,48.1351,11.5820
+Germany,Munich,Schwabing,48.1620,11.5850
+Germany,Hamburg,St. Pauli,53.5511,9.9937
+Germany,Frankfurt,Sachsenhausen,50.1009,8.6821
+Japan,Tokyo,Shibuya,35.6595,139.7004
+Japan,Tokyo,Shinjuku,35.6938,139.7034
+Japan,Tokyo,Asakusa,35.7148,139.7967
+Japan,Osaka,Namba,34.6687,135.5031
+Japan,Osaka,Umeda,34.7024,135.4959
+Japan,Kyoto,Gion,35.0036,135.7785
+Australia,Sydney,Surry Hills,-33.8830,151.2115
+Australia,Sydney,Bondi,-33.8915,151.2767
+Australia,Sydney,Newtown,-33.8970,151.1790
+Australia,Melbourne,Fitzroy,-37.7980,144.9780
+Australia,Melbourne,St Kilda,-37.8610,144.9800
+Australia,Brisbane,South Bank,-27.4785,153.0200
+South Korea,Seoul,Gangnam,37.4979,127.0276
+South Korea,Seoul,Hongdae,37.5563,126.9237
+South Korea,Seoul,Myeongdong,37.5636,126.9869
+South Korea,Busan,Haeundae,35.1587,129.1604
+South Korea,Busan,Nampo,35.0975,129.0290
+Brazil,Sao Paulo,Pinheiros,-23.5670,-46.6920
+Brazil,Sao Paulo,Vila Madalena,-23.5530,-46.6910
+Brazil,Rio de Janeiro,Copacabana,-22.9711,-43.1822
+Brazil,Rio de Janeiro,Ipanema,-22.9838,-43.2050
+Brazil,Brasilia,Asa Sul,-15.8267,-47.9218
+Canada,Toronto,Downtown,43.6532,-79.3832
+Canada,Toronto,Kensington,43.6545,-79.4015
+Canada,Vancouver,Gastown,49.2827,-123.1090
+Canada,Vancouver,Kitsilano,49.2680,-123.1680
+Canada,Montreal,Plateau,45.5220,-73.5740
+South Africa,Cape Town,City Bowl,-33.9249,18.4241
+South Africa,Cape Town,Woodstock,-33.9310,18.4470
+South Africa,Johannesburg,Sandton,-26.1076,28.0567
+South Africa,Johannesburg,Braamfontein,-26.1920,28.0380
+South Africa,Durban,Umhlanga,-29.7280,31.0680
+Thailand,Bangkok,Sukhumvit,13.7314,100.5670
+Thailand,Bangkok,Silom,13.7276,100.5230
+Thailand,Bangkok,Khao San,13.7590,100.4970
+Thailand,Chiang Mai,Old City,18.7883,98.9853
+Thailand,Chiang Mai,Nimmanhaemin,18.7970,98.9680
+United States,New York,Manhattan,40.7580,-73.9855
+United States,New York,Brooklyn,40.6782,-73.9442
+United States,New York,Queens,40.7282,-73.7949
+United States,Los Angeles,Hollywood,34.0928,-118.3287
+United States,Los Angeles,Santa Monica,34.0195,-118.4912
+United States,Chicago,Loop,41.8819,-87.6278
+United States,Houston,Downtown,29.7604,-95.3698
+United States,San Francisco,Mission,37.7599,-122.4148
+China,Beijing,Chaoyang,39.9219,116.4435
+China,Beijing,Dongcheng,39.9286,116.4163
+China,Shanghai,Pudong,31.2304,121.5247
+China,Shanghai,Jing An,31.2286,121.4476
+China,Guangzhou,Tianhe,23.1291,113.2644
+China,Shenzhen,Nanshan,22.5431,113.9360
+Russia,Moscow,Arbat,55.7520,37.5924
+Russia,Moscow,Tverskoy,55.7699,37.5958
+Russia,Saint Petersburg,Nevsky,59.9343,30.3351
+Italy,Rome,Trastevere,41.8870,12.4700
+Italy,Rome,Prati,41.9065,12.4530
+Italy,Milan,Navigli,45.4500,9.1800
+Italy,Milan,Brera,45.4720,9.1875
+Italy,Florence,Santa Croce,43.7696,11.2620
+Mexico,Mexico City,Roma Norte,19.4199,-99.1590
+Mexico,Mexico City,Condesa,19.4117,-99.1731
+Mexico,Guadalajara,Centro,20.6737,-103.3440
+Mexico,Cancun,Hotel Zone,21.1350,-86.7507
+Indonesia,Jakarta,Menteng,-6.1944,106.8390
+Indonesia,Jakarta,Kemang,-6.2600,106.8130
+Indonesia,Bali,Seminyak,-8.6905,115.1685
+Indonesia,Bali,Ubud,-8.5069,115.2625
+Indonesia,Surabaya,Gubeng,-7.2781,112.7530
+Turkey,Istanbul,Beyoglu,41.0370,28.9770
+Turkey,Istanbul,Kadikoy,40.9810,29.0280
+Turkey,Istanbul,Sultanahmet,41.0054,28.9768
+Turkey,Ankara,Cankaya,39.9208,32.8541
+Turkey,Izmir,Alsancak,38.4362,27.1440
+Egypt,Cairo,Zamalek,30.0609,31.2195
+Egypt,Cairo,Heliopolis,30.0900,31.3230
+Egypt,Alexandria,Smouha,31.2178,29.9480
+Nigeria,Lagos,Victoria Island,6.4281,3.4219
+Nigeria,Lagos,Ikeja,6.6018,3.3515
+Nigeria,Abuja,Wuse,9.0579,7.4951
+Nigeria,Port Harcourt,GRA,4.8156,7.0498
+Pakistan,Karachi,Clifton,24.8093,67.0287
+Pakistan,Karachi,Gulshan,24.9215,67.0854
+Pakistan,Lahore,Gulberg,31.5204,74.3587
+Pakistan,Islamabad,F-7,33.7230,73.0685
+Pakistan,Islamabad,Blue Area,33.7100,73.0551
+Sri Lanka,Colombo,Fort,6.9344,79.8428
+Sri Lanka,Colombo,Bambalapitiya,6.8890,79.8570
+Sri Lanka,Kandy,City Centre,7.2906,80.6337
+Philippines,Manila,Makati,14.5547,121.0244
+Philippines,Manila,Quezon City,14.6760,121.0437
+Philippines,Cebu,IT Park,10.3157,123.9054
+Malaysia,Kuala Lumpur,KLCC,3.1570,101.7120
+Malaysia,Kuala Lumpur,Bangsar,3.1250,101.6780
+Malaysia,Penang,George Town,5.4141,100.3288
+Singapore,Singapore,Orchard,1.3050,103.8320
+Singapore,Singapore,Marina Bay,1.2814,103.8586
+Singapore,Singapore,Chinatown,1.2830,103.8450
+Vietnam,Hanoi,Old Quarter,21.0340,105.8510
+Vietnam,Ho Chi Minh City,District 1,10.7769,106.7009
+Vietnam,Ho Chi Minh City,District 3,10.7835,106.6862
+Saudi Arabia,Riyadh,Olaya,24.6905,46.6854
+Saudi Arabia,Jeddah,Al Balad,21.4858,39.1925
+Saudi Arabia,Mecca,Ajyad,21.4225,39.8262
+United Arab Emirates,Dubai,Downtown,25.1972,55.2744
+United Arab Emirates,Dubai,Marina,25.0805,55.1403
+United Arab Emirates,Abu Dhabi,Corniche,24.4539,54.3773
+Qatar,Doha,West Bay,25.3236,51.5310
+Qatar,Doha,Souq Waqif,25.2867,51.5333
+Kenya,Nairobi,Westlands,-1.2670,36.8065
+Kenya,Nairobi,Karen,-1.3197,36.7110
+Kenya,Mombasa,Old Town,-4.0435,39.6682
+Ethiopia,Addis Ababa,Bole,9.0108,38.7863
+Ethiopia,Addis Ababa,Piassa,9.0350,38.7468
+Ghana,Accra,Osu,5.5560,-0.1750
+Ghana,Accra,Airport Area,5.6050,-0.1700
+Tanzania,Dar es Salaam,Msasani,-6.7630,39.2670
+Tanzania,Dar es Salaam,Kariakoo,-6.8270,39.2740
+Morocco,Casablanca,Maarif,33.5731,-7.6190
+Morocco,Marrakech,Medina,31.6295,-7.9811
+Argentina,Buenos Aires,Palermo,-34.5888,-58.4214
+Argentina,Buenos Aires,San Telmo,-34.6215,-58.3718
+Argentina,Buenos Aires,Recoleta,-34.5880,-58.3930
+Colombia,Bogota,Chapinero,4.6486,-74.0628
+Colombia,Bogota,Usaquen,4.7044,-74.0336
+Colombia,Medellin,El Poblado,6.2085,-75.5710
+Chile,Santiago,Providencia,-33.4300,-70.6105
+Chile,Santiago,Las Condes,-33.4072,-70.5670
+Chile,Valparaiso,Cerro Alegre,-33.0437,-71.6279
+Peru,Lima,Miraflores,-12.1191,-77.0300
+Peru,Lima,Barranco,-12.1500,-77.0225
+Peru,Cusco,Plaza de Armas,-13.5160,-71.9785
+New Zealand,Auckland,CBD,-36.8485,174.7633
+New Zealand,Auckland,Ponsonby,-36.8590,174.7448
+New Zealand,Wellington,CBD,-41.2865,174.7762
+Ireland,Dublin,Temple Bar,53.3457,-6.2646
+Ireland,Dublin,Rathmines,53.3235,-6.2630
+Ireland,Cork,City Centre,51.8985,-6.2706
+Netherlands,Amsterdam,Jordaan,52.3740,4.8820
+Netherlands,Amsterdam,De Pijp,52.3530,4.8930
+Netherlands,Rotterdam,Centrum,51.9225,4.4792
+Sweden,Stockholm,Sodermalm,59.3180,18.0710
+Sweden,Stockholm,Ostermalm,59.3380,18.0790
+Sweden,Gothenburg,Linne,57.6995,11.9590
+Portugal,Lisbon,Alfama,38.7117,-9.1300
+Portugal,Lisbon,Bairro Alto,38.7138,-9.1460
+Portugal,Porto,Ribeira,41.1407,-8.6129
+Poland,Warsaw,Srodmiescie,52.2297,21.0122
+Poland,Warsaw,Praga,52.2520,21.0440
+Poland,Krakow,Old Town,50.0614,19.9372
+Switzerland,Zurich,Altstadt,47.3736,8.5377
+Switzerland,Geneva,Eaux-Vives,46.2044,6.1600
+Switzerland,Bern,Altstadt,46.9480,7.4474
+Belgium,Brussels,Ixelles,50.8280,4.3710
+Belgium,Brussels,Marolles,50.8380,4.3480
+Belgium,Antwerp,Centrum,51.2194,4.4025
+Austria,Vienna,Innere Stadt,48.2082,16.3738
+Austria,Vienna,Leopoldstadt,48.2170,16.3960
+Austria,Salzburg,Altstadt,47.8000,13.0440
+Greece,Athens,Plaka,37.9722,23.7322
+Greece,Athens,Monastiraki,37.9762,23.7254
+Greece,Thessaloniki,Ladadika,40.6360,22.9370
+Czech Republic,Prague,Old Town,50.0870,14.4208
+Czech Republic,Prague,Vinohrady,50.0755,14.4490
+Czech Republic,Brno,Centre,49.1951,16.6068
+Hungary,Budapest,District VII,47.4979,19.0704
+Hungary,Budapest,District V,47.4983,19.0408
+Hungary,Debrecen,Centre,47.5316,21.6273
+Romania,Bucharest,Sector 1,44.4522,26.0860
+Romania,Bucharest,Sector 3,44.4130,26.1340
+Romania,Cluj-Napoca,Centre,46.7712,23.6236
+Ukraine,Kyiv,Podil,50.4650,30.5160
+Ukraine,Kyiv,Pechersk,50.4350,30.5500
+Ukraine,Lviv,Old Town,49.8420,24.0320
+Israel,Tel Aviv,Florentin,32.0570,34.7700
+Israel,Tel Aviv,Neve Tzedek,32.0618,34.7650
+Israel,Jerusalem,City Centre,31.7767,35.2345
+Jordan,Amman,Abdoun,31.9534,35.8774
+Jordan,Amman,Jabal Amman,31.9500,35.9250
+Lebanon,Beirut,Hamra,33.8938,35.4835
+Lebanon,Beirut,Gemmayzeh,33.8970,35.5130
+Iran,Tehran,Tajrish,35.7970,51.4318
+Iran,Tehran,Vanak,35.7590,51.4050
+Iran,Isfahan,Naqsh-e Jahan,32.6573,51.6776
+Afghanistan,Kabul,Shahr-e Naw,34.5334,69.1720
+Afghanistan,Kabul,Karte-e-Mamorin,34.5220,69.1510
+Myanmar,Yangon,Downtown,16.8661,96.1951
+Myanmar,Yangon,Bahan,16.8480,96.1560
+Cambodia,Phnom Penh,BKK1,11.5520,104.9300
+Cambodia,Siem Reap,Old Market,13.3600,103.8570
+Laos,Vientiane,City Centre,17.9757,102.6331
+Mongolia,Ulaanbaatar,Sukhbaatar,47.9188,106.9176
+Bhutan,Thimphu,City Centre,27.4728,89.6393
+Maldives,Male,Henveiru,4.1755,73.5093
+Fiji,Suva,City Centre,-18.1416,178.4419
+Papua New Guinea,Port Moresby,Boroko,-6.4287,147.0700
+Iceland,Reykjavik,Downtown,64.1466,-21.9426
+Norway,Oslo,Grunerlokka,59.9225,10.7600
+Norway,Bergen,Bryggen,60.3975,5.3242
+Finland,Helsinki,Kallio,60.1850,24.9540
+Finland,Helsinki,Kamppi,60.1685,24.9320
+Estonia,Tallinn,Old Town,59.4370,24.7453
+Latvia,Riga,Old Town,56.9496,24.1052
+Lithuania,Vilnius,Old Town,54.6832,25.2879
+Croatia,Zagreb,Upper Town,45.8144,15.9730
+Croatia,Split,Old Town,43.5089,16.4402
+Serbia,Belgrade,Stari Grad,44.8176,20.4633
+Bulgaria,Sofia,Centre,42.6977,23.3219
+Albania,Tirana,Blloku,41.3215,19.8168
+North Macedonia,Skopje,Old Bazaar,41.9973,21.4362
+Bosnia and Herzegovina,Sarajevo,Bascarsija,43.8599,18.4313
+Montenegro,Podgorica,Centre,42.4411,19.2636
+Kosovo,Pristina,Centre,42.6629,21.1655
+Georgia,Tbilisi,Old Town,41.6941,44.8015
+Armenia,Yerevan,Centre,40.1792,44.4991
+Azerbaijan,Baku,Old City,40.3661,49.8372
+Kazakhstan,Almaty,Centre,43.2380,76.9450
+Uzbekistan,Tashkent,Centre,41.2995,69.2401
+Kyrgyzstan,Bishkek,Centre,42.8746,74.5698
+Tajikistan,Dushanbe,Centre,38.5598,68.7740
+Turkmenistan,Ashgabat,Centre,37.9601,58.3261
+Cuba,Havana,Vedado,23.1387,-82.3915
+Jamaica,Kingston,New Kingston,18.0073,-76.7881
+Trinidad and Tobago,Port of Spain,Woodbrook,10.6596,-61.5188
+Dominican Republic,Santo Domingo,Zona Colonial,18.4735,-69.8825
+Costa Rica,San Jose,Escazu,9.9272,-84.1356
+Panama,Panama City,Casco Viejo,8.9519,-79.5340
+Ecuador,Quito,La Mariscal,-0.2100,-78.4989
+Bolivia,La Paz,Sopocachi,-16.5100,-68.1330
+Paraguay,Asuncion,Centro,-25.2637,-57.5759
+Uruguay,Montevideo,Ciudad Vieja,-34.9045,-56.2076
+Venezuela,Caracas,Altamira,10.4960,-66.8540
+Tunisia,Tunis,Medina,36.7988,10.1658
+Algeria,Algiers,Bab El Oued,36.7895,3.0470
+Libya,Tripoli,Old City,32.8925,13.1800
+Sudan,Khartoum,Centre,15.5007,32.5599
+Uganda,Kampala,Kololo,0.3276,32.5860
+Rwanda,Kigali,Kiyovu,-1.9508,29.8610
+Zambia,Lusaka,Kabulonga,-15.3982,28.3228
+Zimbabwe,Harare,Avondale,-17.7952,31.0400
+Mozambique,Maputo,Polana,-25.9700,32.5892
+Madagascar,Antananarivo,Analakely,-18.9100,47.5255
+Senegal,Dakar,Plateau,14.6937,-17.4441
+Ivory Coast,Abidjan,Plateau,5.3230,-4.0160
+Cameroon,Yaounde,Centre,3.8480,11.5021
+Democratic Republic of Congo,Kinshasa,Gombe,-4.3176,15.3136
+Angola,Luanda,Ingombota,-8.8383,13.2344
+Namibia,Windhoek,Klein Windhoek,-22.5700,17.0836
+Botswana,Gaborone,CBD,-24.6541,25.9087
+Nepal,Itahari,Main Bazaar,26.6645,87.2783

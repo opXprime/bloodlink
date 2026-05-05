@@ -26,7 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // ---- basic validation ----
         if (!in_array($role, ['donor', 'hospital'])) $errors[] = 'Select a valid role.';
-        if (!validateEmail($email))                   $errors[] = 'Invalid email format.';
+        if (!validateEmail($email)) {
+            $errors[] = 'Invalid email format.';
+        } elseif (substr_compare(strtolower($email), '@gmail.com', -10) !== 0) {
+            $errors[] = 'Email must be a Gmail address, e.g. eg@gmail.com.';
+        }
         $pwErrors = validatePassword($password);
         if ($pwErrors) $errors = array_merge($errors, $pwErrors);
         if ($password !== $confirmPw) $errors[] = 'Passwords do not match.';
@@ -46,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $donorWeight = floatval($_POST['donor_weight'] ?? 0);
 
             if (strlen($name) < 2) $errors[] = 'Full name is required.';
-            if (!preg_match('/^\+?[0-9\s\-]{7,20}$/', $donorPhone)) $errors[] = 'Enter a valid phone number.';
+            if (!preg_match('/^[0-9]{10}$/', $donorPhone)) $errors[] = 'Phone number must be exactly 10 digits.';
             if (!validateBloodType($donorBlood)) $errors[] = 'Select a blood type.';
 
             // age check
@@ -97,8 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name         = $hospitalName;
 
             if (strlen($hospitalName) < 2) $errors[] = 'Hospital name is required.';
-            if (strlen($license) < 2)      $errors[] = 'License number is required.';
-            if (!preg_match('/^\+?[0-9\s\-]{7,20}$/', $hPhone)) $errors[] = 'Enter a valid hospital phone number.';
+            if (!preg_match('/^[0-9]{8}$/', $license)) $errors[] = 'License number must be exactly 8 digits.';
+            if (!preg_match('/^[0-9]{10}$/', $hPhone)) $errors[] = 'Phone number must be exactly 10 digits.';
 
             if (empty($errors)) {
                 $normPhone = preg_replace('/[\s\-]/', '', $hPhone);
@@ -108,6 +112,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
                 $s->execute([':p' => $normPhone]);
                 if ($s->fetch()) $errors[] = 'This phone number is already registered by another hospital.';
+            }
+
+            // unique license number check
+            if (empty($errors)) {
+                $s = $db->prepare(
+                    "SELECT id FROM hospital_profiles
+                     WHERE license_number = :ln"
+                );
+                $s->execute([':ln' => $license]);
+                if ($s->fetch()) $errors[] = 'This license number is already registered by another hospital.';
             }
         }
 
@@ -227,6 +241,18 @@ input::-ms-reveal { display: none; }
     color: #c0392b;
     outline: none;
 }
+.field-error-msg {
+    font-size: 0.875rem;
+    color: #dc3545;
+    margin-top: 0.25rem;
+    display: none;
+}
+.field-error-msg.show {
+    display: block;
+}
+input.is-invalid {
+    border-color: #dc3545 !important;
+}
 </style>
 
 <div class="auth-container" style="max-width:620px">
@@ -285,10 +311,13 @@ input::-ms-reveal { display: none; }
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Phone Number *</label>
-                        <input type="tel" class="form-control" name="donor_phone"
+                        <input type="tel" class="form-control" name="donor_phone" id="donor_phone"
                                value="<?= e($old['donor_phone'] ?? '') ?>"
-                               placeholder="+977-9800000000"
-                               pattern="\+?[0-9\s\-]{7,20}" required>
+                               placeholder="9800000000"
+                               maxlength="10" inputmode="numeric" required oninput="validatePhone('donor_phone')">
+                        <div id="donor_phone-error" class="field-error-msg">
+                            <i class="fas fa-times-circle me-1"></i>Phone number must be 10 digits.
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Blood Type *</label>
@@ -308,18 +337,26 @@ input::-ms-reveal { display: none; }
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Date of Birth *</label>
-                        <input type="date" class="form-control" name="donor_dob"
+                        <input type="date" class="form-control" name="donor_dob" id="donor_dob"
                                value="<?= e($old['donor_dob'] ?? '') ?>"
-                               max="<?= date('Y-m-d', strtotime('-18 years')) ?>" required>
+                               max="<?= date('Y-m-d', strtotime('-18 years')) ?>" required
+                               oninput="validateDob()" onchange="validateDob()">
+                        <div id="donor_dob-error" class="field-error-msg">
+                            <i class="fas fa-times-circle me-1"></i>Date of birth is required and must be 18-65 years old.
+                        </div>
                         <small class="text-muted">
                             <i class="fas fa-lock me-1"></i>Must be 18 or older — this cannot be changed later
                         </small>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Weight (kg) *</label>
-                        <input type="number" class="form-control" name="donor_weight"
+                        <input type="number" class="form-control" name="donor_weight" id="donor_weight"
                                value="<?= e($old['donor_weight'] ?? '') ?>"
-                               min="45" max="200" step="0.5" placeholder="e.g. 55" required>
+                               min="45" max="200" step="0.5" placeholder="e.g. 55" required
+                               oninput="validateWeight()">
+                        <div id="donor_weight-error" class="field-error-msg">
+                            <i class="fas fa-times-circle me-1"></i>Weight must be at least 45 kg.
+                        </div>
                         <small class="text-muted">Minimum 45 kg to be eligible</small>
                     </div>
                 </div>
@@ -329,21 +366,32 @@ input::-ms-reveal { display: none; }
             <div id="hospitalFields" style="display:none">
                 <div class="mb-3">
                     <label class="form-label">Hospital Name *</label>
-                    <input type="text" class="form-control" name="hospital_name"
-                           value="<?= e($old['hospital_name'] ?? '') ?>">
+                    <input type="text" class="form-control" name="hospital_name" id="hospital_name"
+                           value="<?= e($old['hospital_name'] ?? '') ?>" required oninput="validateHospitalName()">
+                    <div id="hospital_name-error" class="field-error-msg">
+                        <i class="fas fa-times-circle me-1"></i>Hospital name is required.
+                    </div>
                 </div>
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
                         <label class="form-label">License Number *</label>
-                        <input type="text" class="form-control" name="license_number"
-                               value="<?= e($old['license_number'] ?? '') ?>">
+                        <input type="text" class="form-control" name="license_number" id="license_number"
+                               value="<?= e($old['license_number'] ?? '') ?>"
+                               placeholder="Enter your 8 digit license number"
+                               maxlength="8" inputmode="numeric" required oninput="validateLicenseNumber()">
+                        <div id="license_number-error" class="field-error-msg">
+                            <i class="fas fa-times-circle me-1"></i>License number must be exactly 8 digits.
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Contact Phone *</label>
-                        <input type="tel" class="form-control" name="hospital_phone"
+                        <input type="tel" class="form-control" name="hospital_phone" id="hospital_phone"
                                value="<?= e($old['hospital_phone'] ?? '') ?>"
-                               placeholder="+977-01-4000000"
-                               pattern="\+?[0-9\s\-]{7,20}">
+                               placeholder="9800000000"
+                               maxlength="10" inputmode="numeric" required oninput="validatePhone('hospital_phone')">
+                        <div id="hospital_phone-error" class="field-error-msg">
+                            <i class="fas fa-times-circle me-1"></i>Phone number must be 10 digits.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -351,8 +399,12 @@ input::-ms-reveal { display: none; }
             <!-- ===== SHARED FIELDS ===== -->
             <div class="mb-3">
                 <label class="form-label">Email Address *</label>
-                <input type="email" class="form-control" name="email"
-                       value="<?= e($old['email'] ?? '') ?>" required>
+                <input type="email" class="form-control" name="email" id="email"
+                       value="<?= e($old['email'] ?? '') ?>" placeholder="eg@gmail.com" required
+                       oninput="validateEmail()">
+                <div id="email-error" class="field-error-msg">
+                    <i class="fas fa-times-circle me-1"></i>Email must be a valid Gmail address like eg@gmail.com.
+                </div>
             </div>
 
             <div class="row g-3 mb-3">
@@ -376,12 +428,15 @@ input::-ms-reveal { display: none; }
                     <label class="form-label">Confirm Password *</label>
                     <div class="pw-wrapper">
                         <input type="password" class="form-control" name="confirm_password"
-                               id="confirm_password" required>
+                               id="confirm_password" required oninput="validatePasswordMatch()">
                         <button type="button" class="pw-toggle"
                                 onclick="togglePw('confirm_password', this)"
                                 aria-label="Show/hide password">
                             <i class="fas fa-eye"></i>
                         </button>
+                    </div>
+                    <div id="pw-match-error" class="field-error-msg">
+                        <i class="fas fa-times-circle me-1"></i>Passwords do not match.
                     </div>
                 </div>
             </div>
@@ -497,6 +552,109 @@ function togglePw(fieldId, btn) {
     }
 }
 
+function setFieldError(fieldId, message, invalid) {
+    var field = document.getElementById(fieldId);
+    var errorMsg = document.getElementById(fieldId + '-error');
+    if (!field || !errorMsg) return;
+    if (invalid) {
+        errorMsg.innerHTML = '<i class="fas fa-times-circle me-1"></i>' + message;
+        errorMsg.classList.add('show');
+        field.classList.add('is-invalid');
+    } else {
+        errorMsg.classList.remove('show');
+        field.classList.remove('is-invalid');
+    }
+}
+
+function validateEmail() {
+    var field = document.getElementById('email');
+    if (!field) return;
+    var value = field.value.trim();
+    var valid = /^[^\s@]+@gmail\.com$/i.test(value);
+    setFieldError('email', 'Email must be a valid Gmail address like eg@gmail.com.', value.length > 0 && !valid);
+}
+
+function validatePhone(fieldId) {
+    var field = document.getElementById(fieldId);
+    if (!field) return;
+    var value = field.value.replace(/[^0-9]/g, '');
+    setFieldError(fieldId, 'Phone number must be 10 digits.', value.length > 0 && value.length !== 10);
+}
+
+function validatePasswordMatch() {
+    var pw = document.getElementById('password');
+    var confirmPw = document.getElementById('confirm_password');
+    var errorMsg = document.getElementById('pw-match-error');
+    if (!pw || !confirmPw || !errorMsg) return;
+    if (!confirmPw.value) {
+        errorMsg.classList.remove('show');
+        confirmPw.classList.remove('is-invalid');
+        return;
+    }
+    if (pw.value !== confirmPw.value) {
+        errorMsg.classList.add('show');
+        confirmPw.classList.add('is-invalid');
+    } else {
+        errorMsg.classList.remove('show');
+        confirmPw.classList.remove('is-invalid');
+    }
+}
+
+function validateDob() {
+    var field = document.getElementById('donor_dob');
+    if (!field) return;
+    var value = field.value;
+    if (!value) {
+        setFieldError('donor_dob', 'Date of birth is required and must be 18-65 years old.', false);
+        return;
+    }
+    var dob = new Date(value + 'T00:00:00');
+    if (isNaN(dob.getTime())) {
+        setFieldError('donor_dob', 'Date of birth is required and must be 18-65 years old.', true);
+        return;
+    }
+    var today = new Date();
+    var age = today.getFullYear() - dob.getFullYear();
+    var m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+    setFieldError('donor_dob', 'Date of birth is required and must be 18-65 years old.', age < 18 || age > 65);
+}
+
+function validateWeight() {
+    var field = document.getElementById('donor_weight');
+    if (!field) return;
+    var value = parseFloat(field.value);
+    if (!field.value) {
+        setFieldError('donor_weight', 'Weight is required.', false);
+        return;
+    }
+    setFieldError('donor_weight', 'Weight must be at least 45 kg.', !isNaN(value) && value < 45);
+}
+
+function validateLicenseNumber() {
+    var field = document.getElementById('license_number');
+    if (!field) return;
+    var value = field.value.replace(/[^0-9]/g, '');
+    setFieldError('license_number', 'License number must be exactly 8 digits.', value.length > 0 && value.length !== 8);
+}
+
+function validateHospitalName() {
+    var field = document.getElementById('hospital_name');
+    if (!field) return;
+    setFieldError('hospital_name', 'Hospital name is required.', field.value.trim().length > 0 && field.value.trim().length < 2);
+}
+
+function validateAllFields() {
+    validateEmail();
+    validatePhone('donor_phone');
+    validatePhone('hospital_phone');
+    validatePasswordMatch();
+    validateDob();
+    validateWeight();
+    validateLicenseNumber();
+    validateHospitalName();
+}
+
 // show/hide donor vs hospital fields
 function toggleRole() {
     var isHosp = document.getElementById('role_hospital').checked;
@@ -516,6 +674,29 @@ function toggleRole() {
             else el.removeAttribute('required');
         });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var pw = document.getElementById('password');
+    if (pw) {
+        pw.addEventListener('input', validatePasswordMatch);
+    }
+    var regForm = document.getElementById('regForm');
+    if (regForm) {
+        regForm.addEventListener('submit', function() {
+            validateAllFields();
+        });
+    }
+    var alertBox = document.querySelector('.alert-danger');
+    if (alertBox) {
+        setTimeout(function() {
+            alertBox.style.transition = 'opacity 0.5s ease-out';
+            alertBox.style.opacity = '0';
+            setTimeout(function() {
+                alertBox.style.display = 'none';
+            }, 500);
+        }, 6000);
+    }
+});
 
 toggleRole();
 </script>
