@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRF()) {
                 'Hospital Verified!',
                 '"' . $hp['hospital_name'] . '" is now verified.',
                 'success',
-                '/modules/hospital/dashboard.php'
+                '/modules/notifications/index.php'
             );
         }
         logAction('hospital_verified', "#$hpId");
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRF()) {
                 'Verification Rejected',
                 'Rejected' . ($reason ? ": $reason" : ''),
                 'danger',
-                '/modules/hospital/profile.php'
+                '/modules/notifications/index.php'
             );
         }
         logAction('hospital_rejected', "#$hpId: $reason");
