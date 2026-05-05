@@ -14,10 +14,11 @@ $s->execute([':u' => currentUserId()]);
 $dp  = $s->fetch();
 $did = $dp['id'] ?? 0;
 
-// ---- Cancel a pending booking ----
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_booking']) && verifyCSRF()) {
-    $bid         = (int)$_POST['booking_id'];
-    $cancelNotes = trim($_POST['cancel_notes'] ?? '');
+// ---- Cancel or report a booking ----
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRF()) {
+    if (isset($_POST['cancel_booking'])) {
+        $bid         = (int)$_POST['booking_id'];
+        $cancelNotes = trim($_POST['cancel_notes'] ?? '');
 
     // Verify booking belongs to this donor and is still pending
     $bs = $db->prepare(
@@ -53,6 +54,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_booking']) && 
 
         logAction('booking_cancelled', "#$bid");
         setFlash('success', 'Booking cancelled. Availability restored.');
+    }
+    }
+    elseif (isset($_POST['report_booking'])) {
+        $bid    = (int)$_POST['booking_id'];
+        $reason = trim($_POST['report_reason'] ?? '');
+
+        if (strlen($reason) < 5) {
+            setFlash('error', 'Report reason must be at least 5 characters.');
+            redirect('/modules/booking/my_bookings.php');
+        }
+
+        $bs = $db->prepare(
+            "SELECT b.id, hp.user_id AS hospital_uid
+             FROM bookings b
+             JOIN blood_requests br2 ON b.blood_request_id = br2.id
+             JOIN hospital_profiles hp ON br2.hospital_id = hp.id
+             WHERE b.id = :b AND b.donor_id = :d AND br2.country_id = :c"
+        );
+        $bs->execute([':b' => $bid, ':d' => $did, ':c' => $cid]);
+        $bk = $bs->fetch();
+
+        if ($bk && !empty($bk['hospital_uid'])) {
+            $db->prepare(
+                "INSERT INTO reports (reporter_id, reported_id, reason)
+                 VALUES (:r, :t, :m)"
+            )->execute([
+                ':r' => currentUserId(),
+                ':t' => $bk['hospital_uid'],
+                ':m' => $reason
+            ]);
+            foreach ($db->query("SELECT id FROM users WHERE role = 'admin'")->fetchAll(PDO::FETCH_COLUMN) as $adminId) {
+                createNotification(
+                    (int)$adminId,
+                    'New report submitted',
+                    'A donor reported a hospital. Review reports.',
+                    'warning',
+                    '/modules/admin/reports.php'
+                );
+            }
+            logAction('report_created', "donor reported hospital #{$bk['hospital_uid']} booking #$bid");
+            setFlash('success', 'Report submitted. Admin will review it.');
+        } else {
+            setFlash('error', 'Unable to locate hospital account for this booking.');
+        }
     }
 
     redirect('/modules/booking/my_bookings.php');
@@ -130,6 +175,20 @@ require_once APP_ROOT . '/includes/header.php';
                 </form>
             </div>
             <?php endif; ?>
+            <div class="mt-2">
+                <form method="POST">
+                    <?= csrfField() ?>
+                    <input type="hidden" name="booking_id" value="<?= $b['id'] ?>">
+                    <input type="hidden" name="report_booking" value="1">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="report_reason" class="form-control"
+                               placeholder="Report hospital (reason)" required minlength="5">
+                        <button type="submit" class="btn btn-outline-danger">
+                            <i class="fas fa-flag me-1"></i>Report Hospital
+                        </button>
+                    </div>
+                </form>
+            </div>
 
         </div>
         <?php endforeach; ?>

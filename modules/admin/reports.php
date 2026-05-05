@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRF()) {
 
     // Review or dismiss a report
     if ($action === 'reviewed' || $action === 'dismissed') {
-        $db->prepare("UPDATE reports SET status = :s, admin_notes = :n, reviewed_at = NOW() WHERE id = :id")
+        $db->prepare("UPDATE reports SET status = :s, admin_notes = :n WHERE id = :id")
            ->execute([':s' => $action, ':n' => $notes, ':id' => $rid]);
         logAction('report_' . $action, "report #$rid");
         setFlash('success', 'Report marked as ' . $action . '.');
@@ -61,12 +61,10 @@ $filter = $_GET['status'] ?? 'pending';
 
 $sql = "SELECT r.*,
             reporter.name AS reporter_name, reporter.email AS reporter_email, reporter.role AS reporter_role,
-            reported.name AS reported_name, reported.email AS reported_email, reported.role AS reported_role,
-            b.status AS booking_status
+            reported.name AS reported_name, reported.email AS reported_email, reported.role AS reported_role
         FROM reports r
         JOIN users reporter ON r.reporter_id = reporter.id
-        JOIN users reported ON r.reported_user_id = reported.id
-        LEFT JOIN bookings b ON r.booking_id = b.id";
+        JOIN users reported ON r.reported_id = reported.id";
 $params = [];
 
 if ($filter !== 'all' && in_array($filter, ['pending', 'reviewed', 'dismissed'])) {
@@ -120,13 +118,8 @@ require_once APP_ROOT . '/includes/header.php';
                     <p class="mb-1"><strong>Reported user:</strong> <?= e($r['reported_name']) ?>
                         <span class="text-muted">(<?= e($r['reported_email']) ?>, <?= e($r['reported_role']) ?>)</span>
                     </p>
-                    <?php if ($r['booking_id']): ?>
-                        <p class="mb-1"><strong>Booking:</strong> #<?= e($r['booking_id']) ?>
-                            <?= $r['booking_status'] ? '— ' . e($r['booking_status']) : '' ?>
-                        </p>
-                    <?php endif; ?>
-                    <?php if ($r['details']): ?>
-                        <p class="mb-1"><strong>Details:</strong> <?= e($r['details']) ?></p>
+                    <?php if ($r['reason']): ?>
+                        <p class="mb-1"><strong>Reason:</strong> <?= e($r['reason']) ?></p>
                     <?php endif; ?>
                     <?php if ($r['admin_notes']): ?>
                         <p class="mb-0 text-info"><strong>Admin notes:</strong> <?= e($r['admin_notes']) ?></p>

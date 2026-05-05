@@ -31,9 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRF()) {
 
     // Verify this booking belongs to this hospital and country
     $s = $db->prepare(
-        "SELECT b.*, br.units_needed, br.units_fulfilled, br.id AS req_id, br.urgency
+        "SELECT b.*, br.units_needed, br.units_fulfilled, br.id AS req_id, br.urgency, dp.user_id AS donor_uid
          FROM bookings b
          JOIN blood_requests br ON b.blood_request_id = br.id
+         JOIN donor_profiles dp ON b.donor_id = dp.id
          WHERE b.id = :b AND br.hospital_id = :h AND br.country_id = :c"
     );
     $s->execute([':b' => $bid, ':h' => $hid, ':c' => $cid]);
@@ -79,6 +80,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRF()) {
                     'warning', '/modules/booking/my_bookings.php');
             }
             logAction('booking_rejected', "#$bid");
+
+        } elseif ($action === 'report') {
+            $reason = trim($_POST['report_reason'] ?? '');
+            if (strlen($reason) < 5) {
+                setFlash('error', 'Report reason must be at least 5 characters.');
+                redirect('/modules/booking/hospital_bookings.php');
+            }
+            if (!empty($bk['donor_uid'])) {
+                $db->prepare(
+                    "INSERT INTO reports (reporter_id, reported_id, reason)
+                     VALUES (:r, :t, :m)"
+                )->execute([
+                    ':r' => $uid,
+                    ':t' => $bk['donor_uid'],
+                    ':m' => $reason
+                ]);
+                foreach ($db->query("SELECT id FROM users WHERE role = 'admin'")->fetchAll(PDO::FETCH_COLUMN) as $adminId) {
+                    createNotification(
+                        (int)$adminId,
+                        'New report submitted',
+                        'A hospital reported a donor. Review reports.',
+                        'warning',
+                        '/modules/admin/reports.php'
+                    );
+                }
+                logAction('report_created', "hospital #$hid reported donor #{$bk['donor_uid']} booking #$bid");
+                setFlash('success', 'Report submitted. Admin will review it.');
+            } else {
+                setFlash('error', 'Unable to locate donor account for this booking.');
+            }
+            redirect('/modules/booking/hospital_bookings.php');
 
         // ---- Complete a confirmed booking (atomic transaction) ----
         } elseif ($action === 'complete' && $bk['status'] === 'confirmed') {
@@ -226,6 +258,16 @@ require_once APP_ROOT . '/includes/header.php';
                             </button>
                         </form>
                         <?php endif; ?>
+                        <div class="mt-2">
+                            <form method="POST" class="input-group input-group-sm">
+                                <?= csrfField() ?>
+                                <input type="hidden" name="booking_id" value="<?= $b['id'] ?>">
+                                <input type="hidden" name="action" value="report">
+                                <input type="text" name="report_reason" class="form-control"
+                                       placeholder="Report donor (reason)" required minlength="5">
+                                <button type="submit" class="btn btn-outline-danger">Report</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>
