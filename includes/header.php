@@ -105,21 +105,20 @@ if (!defined('APP_ROOT')) die('Direct access not permitted');
                         </a>
                     </li>
 
-                    <!-- User dropdown (name + role badge + logout) -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" onclick="document.getElementById('userDrop').classList.toggle('show');return false">
+                    <li class="nav-item">
+                        <span class="nav-link">
                             <i class="fas fa-user-circle me-1"></i><?= e(currentUser()['name'] ?? '') ?>
                             <small class="badge bg-light text-dark ms-1"><?= e(ucfirst(currentUserRole())) ?></small>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" id="userDrop">
-                            <li>
-                                <!-- POST-only logout to prevent CSRF-based forced logout -->
-                                <form method="POST" action="<?= APP_URL ?>/modules/auth/logout.php" class="d-inline">
-                                    <?= csrfField() ?>
-                                    <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i>Logout</button>
-                                </form>
-                            </li>
-                        </ul>
+                        </span>
+                    </li>
+
+                    <li class="nav-item">
+                        <form method="POST" action="<?= APP_URL ?>/modules/auth/logout.php" class="d-inline" onsubmit="return confirm('Are you sure you want to log out?');">
+                            <?= csrfField() ?>
+                            <button type="submit" class="btn btn-outline-light btn-sm ms-2">
+                                <i class="fas fa-sign-out-alt me-1"></i>Logout
+                            </button>
+                        </form>
                     </li>
 
                 <?php else: ?>
