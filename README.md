@@ -33,7 +33,7 @@ Hospitals post blood requests specifying blood type, urgency, and time slots. Th
 | Security Q | What is the system name? |
 | Security A | bloodlink |
 
-## Importing Location Data
+## Importing Location Data Before registering users.... Imporatant
 
 1. Log in as admin
 2. Go to Dashboard → Import CSV
